@@ -6,7 +6,7 @@ module.exports = {
     output: {
       path: __dirname,
       publicPath: '/',
-      filename: 'bundle.js'
+      filename: 'main.js'
     },
     module: {
       rules: [
@@ -17,7 +17,7 @@ module.exports = {
             loader: "script-loader"
           }
         },
-        {
+        /*{
           test: /\.css$/,
           use: [
             {
@@ -34,7 +34,7 @@ module.exports = {
               }
             }
           ]
-        }
+        }*/
       ]
     }
   };
