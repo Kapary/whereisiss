@@ -1,9 +1,5 @@
 window.onload = () => {
-    console.log('test');
-
-    let issData = {};
     const appContent = document.getElementById('app');
-
 
     var updatePosition = (map, marker) => window.setInterval(() => {
         fetch("http://api.open-notify.org/iss-now.json", {
@@ -11,12 +7,10 @@ window.onload = () => {
             credentials: "omit"
         })
             .then(response => {
-                console.log("response", response);
                 return response.json();
             })
             .then(data => {
                 issData = data;
-                console.log("asd", data);
                 appContent.innerHTML = `${data.iss_position.latitude} ${data.iss_position.longitude}`;
 
                 moveMarker(map, marker, data.iss_position.latitude, data.iss_position.longitude)
@@ -24,12 +18,12 @@ window.onload = () => {
             .catch(error => console.log(error));
     }, 5000);
 
+    function moveMarker(map, marker, lat, lon) {
+        marker.setPosition(new google.maps.LatLng(lat, lon));
+        map.panTo(new google.maps.LatLng(lat, lon));
+    };
 
-    var initLat = 0;
-    var initLon = 0;
-
-    function initialize() {
-
+    (function initialize() {
         var myLatLng = new google.maps.LatLng(50, 50),
             myOptions = {
                 zoom: 4,
@@ -40,18 +34,6 @@ window.onload = () => {
             marker = new google.maps.Marker({ position: myLatLng, map: map });
 
         marker.setMap(map);
-        // moveMarker(map, marker);
-
         updatePosition(map, marker);
-
-    }
-
-    function moveMarker(map, marker, lat, lon) {
-        marker.setPosition(new google.maps.LatLng(lat, lon));
-        map.panTo(new google.maps.LatLng(lat, lon));
-    };
-
-    initialize();
-
-
+    })();
 };

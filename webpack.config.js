@@ -17,14 +17,14 @@ module.exports = {
             loader: "script-loader"
           }
         },
-        /*{
-          test: /\.css$/,
+        {
+          test: /\.less$/,
           use: [
             {
               loader: "style-loader"
             },
             {
-              loader: "css-loader",
+              loader: "less-loader",
               options: {
                 modules: true,
                 importLoaders: 1,
@@ -34,7 +34,7 @@ module.exports = {
               }
             }
           ]
-        }*/
+        }
       ]
     }
   };
